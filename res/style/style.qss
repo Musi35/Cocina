@@ -1,0 +1,98 @@
+QPushButton#mesa {
+    background-color: none;
+    color: black;
+    font-family: Verdana;
+    font-size: 16px;
+    border-radius: 60px;
+}
+
+QPushButton#mesa:hover {
+    background-color: #B6CFA0;
+    color: black;
+}
+
+QPushButton#mesa:pressed {
+    background-color: #8C9A6A;
+    color: black;
+}
+
+QPushButton#otros{
+    background-color: #93BEDC;
+    color: black;
+    border: 2px solid #1E3888;
+    border-radius: 5px;
+    font-family: Verdana;
+    font-size: 16px;
+}
+
+QPushButton#otros:hover {
+    background-color: #011638;
+    color: white;
+    border: 2px solid #759FBC;
+}
+
+QPushButton#otros:pressed {
+    background-color: #1E3888;
+    color: white;
+    border: 2px solid #011638;
+}
+
+QPushButton#llamada{
+    background-color: #CCFAC6;
+    color: black;
+    border: 2px solid #389446;
+    border-radius: 5px;
+    font-family: Verdana;
+    font-size: 16px;
+}
+
+QPushButton#llamada:hover {
+    background-color: #389446;
+    color: white;
+    border: 2px solid #CCFAC6;
+}
+
+QPushButton#llamada:pressed {
+    background-color: #CCFAC6;
+    color: black;
+    border: 2px solid #389446;
+
+}
+
+QMainWindow {
+    background-color: #CDE5D7;
+}
+
+QLabel#titulo {
+    font-family: Dinner;
+    font-size: 75px;
+    color: #8C032C;
+}
+
+QPushButton#btn_inicio {
+    font-size: 26px;
+    font-family: Verdana;
+    background-color: #759FBC;
+    color: white;
+    border-radius: 20%;
+}
+
+QPushButton#btn_inicio:hover {
+    background-color: #011638;
+    color: white;
+}
+
+QPushButton#btn_inicio:pressed {
+    background-color: #1E3888;
+    color: white;
+}
+
+QWidget{
+    background-color: #CDE5D7;
+}
+
+QLabel#tit {
+    font-family: "Verdana";
+    font-size: 35px;
+    color: #011638;
+}
