@@ -67,6 +67,7 @@ QLabel#titulo {
     font-family: Dinner;
     font-size: 75px;
     color: #8C032C;
+    background-color: none;
 }
 
 QPushButton#btn_inicio {
@@ -95,4 +96,17 @@ QLabel#tit {
     font-family: "Verdana";
     font-size: 35px;
     color: #011638;
+}
+
+QLabel#normal {
+    font-family: "Verdana";
+    font-size: 25px;
+    color: #011638;
+}
+
+QLineEdit#txt{
+    font-family: "Verdana";
+    font-size: 20px;
+    color: #011638;
+    background-color: white;
 }

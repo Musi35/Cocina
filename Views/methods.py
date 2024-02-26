@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton
+from PySide6.QtWidgets import QLabel, QPushButton
 from PySide6.QtGui import QPixmap, QIcon
 
 class ColoredButton(QPushButton):

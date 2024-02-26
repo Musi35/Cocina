@@ -15,7 +15,7 @@ class solo(QWidget):
         
         lbl_nombre = QLabel(self)
         lbl_nombre.setObjectName("titulo")
-        lbl_nombre.setText(nombre)
+        lbl_nombre.setText(nombre + "'s")
         lbl_nombre.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lbl_nombre.setGeometry(0, 0, 1080, 120)
 
