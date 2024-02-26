@@ -18,7 +18,6 @@ class options(QWidget):
         lbl_titulo.setGeometry(200, 0, 500, 120)
         # endregion
 
-
     def setup_ui(self):
         # region buttons
         btn_guardar = mets.ColoredButton("Guardar datos", self)
