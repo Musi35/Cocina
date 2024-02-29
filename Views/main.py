@@ -106,6 +106,7 @@ def obtener_tareas(ruta_archivo):
     except FileNotFoundError:
         print("El archivo no se encontró.")
         return None
+
 app = QApplication(sys.argv)
 window = MainWindow()
 mets.apply_stylesheet(app)
