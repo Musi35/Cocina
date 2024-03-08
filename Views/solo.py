@@ -1,9 +1,11 @@
 from PySide6.QtWidgets import QDialog, QLabel, QWidget, QVBoxLayout
 import methods as mets
+import burgers as burgi
 from PySide6.QtCore import Signal, Qt
 
 class solo(QWidget):
     menu_principal_signal = Signal()
+    
     def __init__(self, nombre = ""):
         super().__init__()
 
@@ -59,9 +61,19 @@ class solo(QWidget):
         btn_tareas.setObjectName("otros")
         btn_tareas.setFixedSize(160, 60)
         btn_tareas.move(880, 130)
-        # endregion
+        btn_tareas.clicked.connect(self.on_btn_tareas_clicked)
+        # endregion     
         # endregion
 
     def on_btn_salir_clicked(self):
         self.menu_principal_signal.emit()
         self.close()
+    
+    def on_btn_tareas_clicked(self):
+        self.burgi = burgi.burger()
+        self.burgi.solo_signal.connect(self.show_burger_window)
+        self.burgi.show()
+        self.close()
+
+    def show_burger_window(self):
+        self.show()

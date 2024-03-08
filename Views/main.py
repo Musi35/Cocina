@@ -70,7 +70,6 @@ class MainWindow(QMainWindow):
         self.show()
     # endregion
 
-
 def obtener_nombre(ruta_archivo):
     try:
         # Abrir el archivo en modo lectura

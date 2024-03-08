@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QDialog, QLabel, QWidget, QVBoxLayout
+from PySide6.QtWidgets import QLabel, QWidget
 import methods as mets
 from PySide6.QtCore import Signal, Qt
 

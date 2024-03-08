@@ -110,3 +110,21 @@ QLineEdit#txt{
     color: #011638;
     background-color: white;
 }
+
+QPushButton#hamburguesa{
+    background-color: none;
+    border: 5px solid #011638;
+    border-radius: 7px;
+}
+
+QPushButton#hamburguesa:hover {
+    background-color: #d06d6d28;
+}
+
+QPushButton#hamburguesa:pressed {
+    background-color: #b6060621;
+}
+
+QLabel#imagen{
+    background-color: #96ADC8;
+}

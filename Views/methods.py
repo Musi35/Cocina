@@ -17,3 +17,4 @@ def apply_stylesheet(app):
 
 def iconify(window):
     window.setWindowIcon(QIcon("src/AdminSoftware/res/img/icono.ico"))
+    
