@@ -1,5 +1,7 @@
 from PySide6.QtWidgets import QLabel, QPushButton
 from PySide6.QtGui import QPixmap, QIcon
+import connection as con
+import random, time
 
 class ColoredButton(QPushButton):
     def __init__(self, text, parent=None):
@@ -17,4 +19,8 @@ def apply_stylesheet(app):
 
 def iconify(window):
     window.setWindowIcon(QIcon("src/AdminSoftware/res/img/icono.ico"))
-    
+
+def temporizador(segundos):
+    for segundo_actual in range(segundos, 0, -1):
+        time.sleep(1)
+        return True

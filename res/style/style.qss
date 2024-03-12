@@ -128,3 +128,7 @@ QPushButton#hamburguesa:pressed {
 QLabel#imagen{
     background-color: #96ADC8;
 }
+
+QLabel#orden{
+    background-color: none;
+}

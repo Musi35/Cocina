@@ -1,4 +1,4 @@
--- Crea la base de datos de la hamburguesería
+-- Crea la base de datos para los clientes
 CREATE TABLE CLIENTES ( 
     ID INT PRIMARY KEY, 
     NOMBRE VARCHAR(100), 
@@ -10,7 +10,6 @@ CREATE TABLE CLIENTES (
 );
 
 --Datos de los clientes
-
 INSERT INTO CLIENTES VALUES(1, 'Bandit', false,true,false,true,'Coca-Cola');
 INSERT INTO CLIENTES VALUES(2, 'Bingo', true,false,false,false,'Fanta');
 INSERT INTO CLIENTES VALUES(3, 'Bluey', false,true,true,false,'Coca-Cola');

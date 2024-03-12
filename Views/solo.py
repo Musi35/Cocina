@@ -1,7 +1,21 @@
-from PySide6.QtWidgets import QDialog, QLabel, QWidget, QVBoxLayout
+from PySide6.QtWidgets import QLabel, QWidget
 import methods as mets
 import burgers as burgi
 from PySide6.QtCore import Signal, Qt
+import random, connection as con
+
+
+def generar_orden():
+    # Generar un id aleatorio
+    num_random = random.randint(1, 24)
+    
+    # Obtener los datos del cliente
+    cliente = con.get_cliente(num_random)
+    if cliente is not None:
+        id_cliente, nombre, tomate, lechuga, cebolla, queso, chesco = cliente
+        return id_cliente, nombre, tomate, lechuga, cebolla, queso, chesco
+    else:
+        return None
 
 class solo(QWidget):
     menu_principal_signal = Signal()
@@ -21,6 +35,7 @@ class solo(QWidget):
         lbl_nombre.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lbl_nombre.setGeometry(0, 0, 1080, 120)
 
+    
     def setup_ui(self):
         # region buttons
         # region mesas
