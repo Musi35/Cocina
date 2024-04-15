@@ -51,7 +51,6 @@ c25_path = "src/AdminSoftware/res/img/costumers/25.png"
 # endregion
 # endregion
 
-
 class burger(QWidget):
     solo_signal = Signal()
 
@@ -69,6 +68,7 @@ class burger(QWidget):
         self.btn_tomate = mets.ColoredButton(self)
         self.btn_cebolla = mets.ColoredButton(self)
         self.btn_queso = mets.ColoredButton(self)
+        self.btn_pan_arriba = mets.ColoredButton(self)
         # endregion
 
         self.setWindowTitle("La Cocinita - Orden")
@@ -110,6 +110,12 @@ class burger(QWidget):
         self.btn_queso.move(620, 670)
         self.btn_queso.clicked.connect(self.on_btn_queso_clicked)
         self.btn_queso.raise_()
+        
+        self.btn_pan_arriba.setObjectName("hamburguesa")
+        self.btn_pan_arriba.setFixedSize(150, 100)
+        self.btn_pan_arriba.move(820, 670)
+        self.btn_pan_arriba.clicked.connect(self.on_btn_pan_arriba_clicked)
+        self.btn_pan_arriba.raise_()
         # endregion
 
         # region bebidas
@@ -147,7 +153,13 @@ class burger(QWidget):
         btn_terminar = mets.ColoredButton("Terminar orden", self)
         btn_terminar.setObjectName("otros")
         btn_terminar.setFixedSize(160, 60)
-        btn_terminar.move(870, 700)
+        btn_terminar.move(1000, 700)
+        
+        btn_limpiar = mets.ColoredButton("Limpiar", self)
+        btn_limpiar.setObjectName("otros")
+        btn_limpiar.setFixedSize(160, 60)
+        btn_limpiar.move(1000, 630)
+        btn_limpiar.clicked.connect(self.on_btn_limpiar_clicked)
         # endregion
 
         # region imagenes
@@ -179,6 +191,13 @@ class burger(QWidget):
         lbl_queso.setObjectName("imagen")
         lbl_queso.move(620, 670)
         lbl_queso.lower()
+        
+        lbl_pan_arriba = QLabel(self)
+        self.set_image_on_label(lbl_pan_arriba, pan_arriba_path, 1.8)
+        lbl_pan_arriba.setObjectName("imagen")
+        lbl_pan_arriba.setFixedSize(150, 100)
+        lbl_pan_arriba.move(820, 670)
+        lbl_pan_arriba.lower()
         # endregion
         
         # region bebidas
@@ -246,7 +265,7 @@ class burger(QWidget):
         
         self.lbl_pos5.setObjectName("orden")
         self.lbl_pos5.setFixedSize(300, 200)
-        self.lbl_pos5.move(220, 150)
+        self.lbl_pos5.move(220, 170)
         self.lbl_pos5.raise_()
         
         self.lbl_refresco.setObjectName("orden")
@@ -256,7 +275,7 @@ class burger(QWidget):
         # endregion
         # endregion
 
-    # region button functions
+# region button functions
 
     def on_btn_lechuga_clicked(self):
         self.clicker += 1
@@ -325,4 +344,21 @@ class burger(QWidget):
 
     def on_btn_fanta_clicked(self):
         self.set_image_on_label(self.lbl_refresco, fanta_path, .8)
+    
+    def on_btn_pan_arriba_clicked(self):
+        self.set_image_on_label(self.lbl_pos5, pan_arriba_path, 1)
+    
+    def on_btn_limpiar_clicked(self):
+        self.lbl_pos1.clear()
+        self.lbl_pos2.clear()
+        self.lbl_pos3.clear()
+        self.lbl_pos4.clear()
+        self.lbl_pos5.clear()
+        self.lbl_refresco.clear()
+        self.clicker = 0
+        self.btn_lechuga.setDisabled(False)
+        self.btn_tomate.setDisabled(False)
+        self.btn_cebolla.setDisabled(False)
+        self.btn_queso.setDisabled(False)
+        self.btn_pan_arriba.setDisabled(False)
     # endregion
