@@ -4,19 +4,7 @@ import burgers as burgi
 from PySide6.QtCore import Signal, Qt
 import random, connection as con
 
-
-def generar_orden():
-    # Generar un id aleatorio
-    num_random = random.randint(1, 24)
-    
-    # Obtener los datos del cliente
-    cliente = con.get_cliente(num_random)
-    if cliente is not None:
-        id_cliente, nombre, tomate, lechuga, cebolla, queso, chesco = cliente
-        return id_cliente, nombre, tomate, lechuga, cebolla, queso, chesco
-    else:
-        return None
-
+ruta_txt = "src/AdminSoftware/res/options/options.txt"
 class solo(QWidget):
     menu_principal_signal = Signal()
     
@@ -92,3 +80,10 @@ class solo(QWidget):
 
     def show_burger_window(self):
         self.show()
+
+def generar_ordenes(num_elementos = mets.obtener_tareas(ruta_txt)):
+    rango = list(range(1, 26))
+    random.shuffle(rango)
+    lista_generada = rango[:num_elementos]
+    return lista_generada
+

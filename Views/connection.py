@@ -37,14 +37,7 @@ def get_cliente(cliente_id):
         # Obtener los resultados
         cliente_data = cursor.fetchone()
 
-        if cliente_data:
-            # Desempaquetar y devolver los datos individualmente
-            id_cliente, nombre, tomate, lechuga, cebolla, queso, chesco = cliente_data
-            return id_cliente, nombre, tomate, lechuga, cebolla, queso, chesco
-
-        else:
-            print(f"No se encontró cliente con ID {cliente_id}")
-            return None
+        return cliente_data
 
     except Exception as e:
         print(f"Error al obtener cliente: {e}")
@@ -56,3 +49,46 @@ def get_cliente(cliente_id):
             cursor.close()
             conex.close()
             print("Conexión cerrada.")
+
+def obtener_ruta(cliente_id):
+    cliente_data = get_cliente(cliente_id)
+    if cliente_data:
+        ruta = f"src/AdminSoftware/res/img/costumers/{cliente_id}.png"
+        return ruta
+    else:
+        return None
+
+def obtener_nombre(cliente_id):
+    cliente_data = get_cliente(cliente_id)
+    if cliente_data:
+        _, nombre, *_ = cliente_data
+        return nombre
+    else:
+        return None
+
+def obtener_ingredientes(cliente_id):
+    cliente_data = get_cliente(cliente_id)
+    if cliente_data:
+        _, _, tomate, lechuga, cebolla, queso, _, _= cliente_data
+        ingredientes = []
+
+        if tomate:
+            ingredientes.append("Tomate")
+        if lechuga:
+            ingredientes.append("Lechuga")
+        if cebolla:
+            ingredientes.append("Cebolla")
+        if queso:
+            ingredientes.append("Queso")
+
+        return ingredientes
+    else:
+        return None
+
+def obtener_refresco(cliente_id):
+    cliente_data = get_cliente(cliente_id)
+    if cliente_data:
+        _, _, _, _, _, _, refresco, _ = cliente_data
+        return refresco
+    else:
+        return None

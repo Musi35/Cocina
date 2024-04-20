@@ -132,3 +132,21 @@ QLabel#imagen{
 QLabel#orden{
     background-color: none;
 }
+
+QLabel#ticket{
+    background-color: #ADD8E6;
+    border: 5px solid white;
+    color:#011638;
+    font-family: "Verdana";
+    font-size: 25px;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+}
+
+QMessageBox {
+    background-color: #CDE5D7;
+    color: #011638;
+    font-family: "Verdana";
+    font-size: 20px;
+}

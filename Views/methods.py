@@ -20,7 +20,21 @@ def apply_stylesheet(app):
 def iconify(window):
     window.setWindowIcon(QIcon("src/AdminSoftware/res/img/icono.ico"))
 
-def temporizador(segundos):
-    for segundo_actual in range(segundos, 0, -1):
-        time.sleep(1)
-        return True
+def obtener_tareas(ruta_archivo):
+    try:
+        # Abrir el archivo en modo lectura
+        with open(ruta_archivo, 'r') as archivo:
+            # Leer todas las líneas del archivo
+            lineas = archivo.readlines()
+
+            # Buscar la línea que contiene "Tareas:"
+            for linea in lineas:
+                if "Tareas:" in linea:
+                    # Extraer el número de tareas después de "Tareas:"
+                    tareas = int(linea.split(":")[1].strip())
+                    return tareas
+
+    except FileNotFoundError:
+        print("El archivo no se encontró.")
+        return None
+

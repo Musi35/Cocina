@@ -61,7 +61,7 @@ class MainWindow(QMainWindow):
     def on_btn_opciones_clicked(self):
         self.close()
         nombre = obtener_nombre(ruta_txt)
-        tareas = obtener_tareas(ruta_txt)
+        tareas = mets.obtener_tareas(ruta_txt)
         self.opciones = op.options(nombre or "", tareas or 0)
         self.opciones.menu_principal_signal.connect(self.show_main_window)
         self.opciones.show()
@@ -88,23 +88,6 @@ def obtener_nombre(ruta_archivo):
         print("El archivo no se encontró.")
         return None
 
-def obtener_tareas(ruta_archivo):
-    try:
-        # Abrir el archivo en modo lectura
-        with open(ruta_archivo, 'r') as archivo:
-            # Leer todas las líneas del archivo
-            lineas = archivo.readlines()
-
-            # Buscar la línea que contiene "Tareas:"
-            for linea in lineas:
-                if "Tareas:" in linea:
-                    # Extraer el número de tareas después de "Tareas:"
-                    tareas = int(linea.split(":")[1].strip())
-                    return tareas
-
-    except FileNotFoundError:
-        print("El archivo no se encontró.")
-        return None
 
 app = QApplication(sys.argv)
 window = MainWindow()
