@@ -1,7 +1,6 @@
 from PySide6.QtWidgets import QLabel, QPushButton
 from PySide6.QtGui import QPixmap, QIcon
-import connection as con
-import random, time
+from PySide6.QtCore import Qt
 
 class ColoredButton(QPushButton):
     def __init__(self, text, parent=None):
@@ -38,3 +37,8 @@ def obtener_tareas(ruta_archivo):
         print("El archivo no se encontró.")
         return None
 
+def set_image_on_label(label, image_path, number):
+        pixmap = QPixmap(image_path)
+        pixmap = pixmap.scaledToWidth(label.width() * number)
+        label.setPixmap(pixmap)
+        label.setAlignment(Qt.AlignmentFlag.AlignCenter)

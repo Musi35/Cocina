@@ -150,3 +150,7 @@ QMessageBox {
     font-family: "Verdana";
     font-size: 20px;
 }
+
+QLabel#test{
+    background-color: none;
+}

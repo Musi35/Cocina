@@ -63,14 +63,27 @@ class options(QWidget):
     def on_btn_guardar_clicked(self, nombre, tareas):
         # Chequeo de los campos
         if not nombre or not tareas:
-            QMessageBox.warning(self, "Advertencia", "Por favor, ingrese el nombre y las tareas.")
+            QMessageBox.warning(self, "Advertencia", "Revisa que todos los campos estén llenos.")
             return
-        
+
+        # Convertir la entrada de tareas a un número entero
+        try:
+            tareas = int(tareas)
+        except ValueError:
+            QMessageBox.warning(self, "¡Cuidado!", "¡Ups! Parece que el número que escribiste para las tareas no es válido. ¿Seguro que es un número?")
+            return
+
+        # Verificar que el número de tareas sea válido (menor o igual a 10)
+        if tareas > 10:
+            QMessageBox.warning(self, "Advertencia", "Ups! Parece que el número de tareas es muy grande. Por favor, introduce un número menor o igual a 10.")
+            return
+    
         # Crear una cadena con el formato deseado
         datos_a_guardar = f"Nombre: {nombre}\nTareas: {tareas}"
 
         # Escribir la cadena en el archivo TXT
         with open("src/AdminSoftware/res/options/options.txt", "w") as archivo:
             archivo.write(datos_a_guardar)
-        #Mostrar un QMessageBox indicando que los datos se actualizaron correctamente
+        # Mostrar un QMessageBox indicando que los datos se actualizaron correctamente
         QMessageBox.information(self, "Éxito", "Los datos se actualizaron correctamente.")
+

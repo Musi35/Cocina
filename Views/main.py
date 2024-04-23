@@ -88,7 +88,6 @@ def obtener_nombre(ruta_archivo):
         print("El archivo no se encontró.")
         return None
 
-
 app = QApplication(sys.argv)
 window = MainWindow()
 mets.apply_stylesheet(app)

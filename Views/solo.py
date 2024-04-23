@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QLabel, QWidget
+from PySide6.QtWidgets import QLabel, QWidget, QMessageBox
 import methods as mets
 import burgers as burgi
 from PySide6.QtCore import Signal, Qt
@@ -13,70 +13,58 @@ class solo(QWidget):
 
         self.setWindowTitle("La Cocinita - Modo Solitario")
         self.resize(1080, 720)
-        label = mets.load_image_label(self, "src/AdminSoftware/res/img/fondo.jpg")
+        label = mets.load_image_label(self, "src/AdminSoftware/res/img/fondo_solo.jpg")
         mets.iconify(self)
-        self.setup_ui()
+        lista = generar_ordenes()
         
+        # region labels
         lbl_nombre = QLabel(self)
         lbl_nombre.setObjectName("titulo")
         lbl_nombre.setText(nombre + "'s")
         lbl_nombre.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lbl_nombre.setGeometry(0, 0, 1080, 120)
-
-    
-    def setup_ui(self):
-        # region buttons
-        # region mesas
-        btn_m1 = mets.ColoredButton("1", self)
-        btn_m1.setObjectName("mesa")
-        btn_m1.setFixedSize(120, 120)
-        btn_m1.move(385, 195)
-
-        btn_m2 = mets.ColoredButton("2", self)
-        btn_m2.setObjectName("mesa")
-        btn_m2.setFixedSize(120, 120)
-        btn_m2.move(600, 195)
-
-        btn_m3 = mets.ColoredButton("3", self)
-        btn_m3.setObjectName("mesa")
-        btn_m3.setFixedSize(120, 120)
-        btn_m3.move(385, 480)
-
-        btn_m4 = mets.ColoredButton("4", self)
-        btn_m4.setObjectName("mesa")
-        btn_m4.setFixedSize(120, 120)
-        btn_m4.move(600, 480)
+        
+        self.lbl_cliente = QLabel(self)
+        self.lbl_cliente.setObjectName("test")
+        self.lbl_cliente.setFixedSize(200, 270)
+        self.lbl_cliente.move(400, 200)
+        mets.set_image_on_label(self.lbl_cliente, con.obtener_ruta(lista[0]), 1.2)
         # endregion
 
-        # region otros
-        btn_llamadas = mets.ColoredButton("Llamada Entrante", self)
-        btn_llamadas.setObjectName("llamada")
-        btn_llamadas.setFixedSize(160, 60)
-        btn_llamadas.move(40, 220)
-
+        # region buttons
+        self.btn_tareas = mets.ColoredButton("Tarea Pendiente", self)
+        self.btn_tareas.setObjectName("otros")
+        self.btn_tareas.setFixedSize(160, 60)
+        self.btn_tareas.move(880, 130)
+        self.btn_tareas.clicked.connect(lambda: self.on_btn_tareas_clicked(lista))
+        
         btn_salir = mets.ColoredButton("Menú Principal", self)
         btn_salir.setObjectName("otros")
         btn_salir.setFixedSize(160, 60)
-        btn_salir.move(40, 400)
+        btn_salir.move(880, 50)
         btn_salir.clicked.connect(self.on_btn_salir_clicked)
-
-        btn_tareas = mets.ColoredButton("Tarea Pendiente", self)
-        btn_tareas.setObjectName("otros")
-        btn_tareas.setFixedSize(160, 60)
-        btn_tareas.move(880, 130)
-        btn_tareas.clicked.connect(self.on_btn_tareas_clicked)
-        # endregion     
-        # endregion
+        # endregion   
 
     def on_btn_salir_clicked(self):
         self.menu_principal_signal.emit()
         self.close()
-    
-    def on_btn_tareas_clicked(self):
-        self.burgi = burgi.burger()
+
+    def on_btn_tareas_clicked(self, lista):
+        if len(lista) == 0:
+            QMessageBox.information(self, "Terminaste el día", "Ya no hay clientes, ¡buen trabajo!")
+            return None
+        else:
+            print(lista)
+            if len(lista) == 1:
+                self.lbl_cliente.clear()
+            else:
+                mets.set_image_on_label(self.lbl_cliente, con.obtener_ruta(lista[1]), 1.2)
+        
+        self.burgi = burgi.burger(lista.pop(0)) # type: ignore
         self.burgi.solo_signal.connect(self.show_burger_window)
         self.burgi.show()
         self.close()
+
 
     def show_burger_window(self):
         self.show()

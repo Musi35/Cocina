@@ -34,11 +34,10 @@ def mensaje_good():
     msgBox.setText("¡Lo hiciste increíble! Te ganaste una estrella.")
     msgBox.exec_()
 
-
 class burger(QWidget):
     solo_signal = Signal()
 
-    def __init__(self):
+    def __init__(self, cliente_id):
         super().__init__()
 
         # region Variables de instancia
@@ -58,16 +57,12 @@ class burger(QWidget):
         self.setWindowTitle("La Cocinita - Orden")
         mets.iconify(self)
         self.resize(1200, 900)
-        self.setup_ui()
+        self.setup_ui(cliente_id)
         self.clicker = 0
+        orden.clear()
+        bebida_actual.clear()
 
-    def set_image_on_label(self, label, image_path, number):
-        pixmap = QPixmap(image_path)
-        pixmap = pixmap.scaledToWidth(label.width() * number)
-        label.setPixmap(pixmap)
-        label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-    def setup_ui(self):
+    def setup_ui(self, cliente_id):
         # region buttons
         # region hamburguesas
         # region comida
@@ -138,7 +133,7 @@ class burger(QWidget):
         btn_terminar.setObjectName("otros")
         btn_terminar.setFixedSize(160, 60)
         btn_terminar.move(1000, 700)
-        btn_terminar.clicked.connect(self.on_btn_terminar_clicked)
+        btn_terminar.clicked.connect(lambda: self.on_btn_terminar_clicked(cliente_id))
 
         btn_limpiar = mets.ColoredButton("Limpiar", self)
         btn_limpiar.setObjectName("otros")
@@ -150,35 +145,35 @@ class burger(QWidget):
         # region imagenes
         # region comida
         lbl_lechuga = QLabel(self)
-        self.set_image_on_label(lbl_lechuga, lechuga_path, 1.8)
+        mets.set_image_on_label(lbl_lechuga, lechuga_path, 1.8)
         lbl_lechuga.setFixedSize(150, 100)
         lbl_lechuga.setObjectName("imagen")
         lbl_lechuga.move(20, 670)
         lbl_lechuga.lower()
 
         lbl_tomate = QLabel(self)
-        self.set_image_on_label(lbl_tomate, tomate_path, 1.8)
+        mets.set_image_on_label(lbl_tomate, tomate_path, 1.8)
         lbl_tomate.setFixedSize(150, 100)
         lbl_tomate.setObjectName("imagen")
         lbl_tomate.move(220, 670)
         lbl_tomate.lower()
 
         lbl_cebolla = QLabel(self)
-        self.set_image_on_label(lbl_cebolla, cebolla_path, 1.8)
+        mets.set_image_on_label(lbl_cebolla, cebolla_path, 1.8)
         lbl_cebolla.setFixedSize(150, 100)
         lbl_cebolla.setObjectName("imagen")
         lbl_cebolla.move(420, 670)
         lbl_cebolla.lower()
 
         lbl_queso = QLabel(self)
-        self.set_image_on_label(lbl_queso, quesito_path, 1.8)
+        mets.set_image_on_label(lbl_queso, quesito_path, 1.8)
         lbl_queso.setFixedSize(150, 100)
         lbl_queso.setObjectName("imagen")
         lbl_queso.move(620, 670)
         lbl_queso.lower()
 
         lbl_pan_arriba = QLabel(self)
-        self.set_image_on_label(lbl_pan_arriba, pan_arriba_path, 1.8)
+        mets.set_image_on_label(lbl_pan_arriba, pan_arriba_path, 1.8)
         lbl_pan_arriba.setObjectName("imagen")
         lbl_pan_arriba.setFixedSize(150, 100)
         lbl_pan_arriba.move(820, 670)
@@ -187,28 +182,28 @@ class burger(QWidget):
 
         # region bebidas
         lbl_coca = QLabel(self)
-        self.set_image_on_label(lbl_coca, logo_coca_path, 1.8)
+        mets.set_image_on_label(lbl_coca, logo_coca_path, 1.8)
         lbl_coca.setFixedSize(150, 100)
         lbl_coca.setObjectName("imagen")
         lbl_coca.move(20, 60)
         lbl_coca.lower()
 
         lbl_fanta = QLabel(self)
-        self.set_image_on_label(lbl_fanta, logo_fanta_path, 1.8)
+        mets.set_image_on_label(lbl_fanta, logo_fanta_path, 1.8)
         lbl_fanta.setFixedSize(150, 120)
         lbl_fanta.setObjectName("imagen")
         lbl_fanta.move(20, 170)
         lbl_fanta.lower()
 
         lbl_fresca = QLabel(self)
-        self.set_image_on_label(lbl_fresca, logo_fresca_path, 1.8)
+        mets.set_image_on_label(lbl_fresca, logo_fresca_path, 1.8)
         lbl_fresca.setFixedSize(150, 120)
         lbl_fresca.setObjectName("imagen")
         lbl_fresca.move(20, 300)
         lbl_fresca.lower()
 
         lbl_agua = QLabel(self)
-        self.set_image_on_label(lbl_agua, logo_agua_path, 1.8)
+        mets.set_image_on_label(lbl_agua, logo_agua_path, 1.8)
         lbl_agua.setFixedSize(150, 100)
         lbl_agua.setObjectName("imagen")
         lbl_agua.move(20, 430)
@@ -217,13 +212,13 @@ class burger(QWidget):
 
         # region fijos
         lbl_pan_abajo = QLabel(self)
-        self.set_image_on_label(lbl_pan_abajo, pan_abajo_path, 3)
+        mets.set_image_on_label(lbl_pan_abajo, pan_abajo_path, 3)
         lbl_pan_abajo.setObjectName("orden")
         lbl_pan_abajo.setFixedSize(300, 200)
         lbl_pan_abajo.move(220, 450)
 
         lbl_carne = QLabel(self)
-        self.set_image_on_label(lbl_carne, carne_path, 3)
+        mets.set_image_on_label(lbl_carne, carne_path, 3)
         lbl_carne.setObjectName("orden")
         lbl_carne.setFixedSize(300, 200)
         lbl_carne.move(220, 360)
@@ -264,35 +259,34 @@ class burger(QWidget):
         lbl_nombre = QLabel(self)
         lbl_nombre.setFixedSize(150, 75)
         lbl_nombre.move(1050, 10)
-        lbl_nombre.setText(conn.obtener_nombre(25))  # type: ignore
+        lbl_nombre.setText(conn.obtener_nombre(cliente_id))  # type: ignore
         lbl_nombre.setObjectName("normal")
 
         lbl_foto = QLabel(self)
         lbl_foto.setFixedSize(100, 150)
         lbl_foto.move(900, 10)
         lbl_foto.setObjectName("normal")
-        self.set_image_on_label(
-            lbl_foto, conn.obtener_ruta(25), 1)  # type: ignore
+        mets.set_image_on_label(lbl_foto, conn.obtener_ruta(cliente_id), 1)  # type: ignore
 
         lbl_ingredientes = QLabel(self)
         lbl_ingredientes.setFixedSize(200, 300)
         lbl_ingredientes.move(950, 180)
         lbl_ingredientes.setObjectName("ticket")
-        lista = "\n \n".join(conn.obtener_ingredientes(25))  # type: ignore
+        lista = "\n \n".join(conn.obtener_ingredientes(cliente_id))  # type: ignore
         lbl_ingredientes.setText(lista)
 
         lbl_chesco = QLabel(self)
         lbl_chesco.setFixedSize(200, 125)
         lbl_chesco.move(950, 480)
-        logo = conn.obtener_refresco(25)  # type: ignore
+        logo = conn.obtener_refresco(cliente_id)  # type: ignore
         if logo == "Coca-Cola":
-            self.set_image_on_label(lbl_chesco, logo_coca_path, 1)
+            mets.set_image_on_label(lbl_chesco, logo_coca_path, 1)
         elif logo == "Fanta":
-            self.set_image_on_label(lbl_chesco, logo_fanta_path, 1)
+            mets.set_image_on_label(lbl_chesco, logo_fanta_path, 1)
         elif logo == "Fresca":
-            self.set_image_on_label(lbl_chesco, logo_fresca_path, 1)
+            mets.set_image_on_label(lbl_chesco, logo_fresca_path, 1)
         elif logo == "Agua":
-            self.set_image_on_label(lbl_chesco, logo_agua_path, 1)
+            mets.set_image_on_label(lbl_chesco, logo_agua_path, 1)
         # endregion
 
 # region button functions
@@ -302,78 +296,78 @@ class burger(QWidget):
         orden.append("Lechuga")
         self.btn_lechuga.setDisabled(True)
         if self.clicker == 1:
-            self.set_image_on_label(self.lbl_pos1, lechuga_path, .8)
+            mets.set_image_on_label(self.lbl_pos1, lechuga_path, .8)
         elif self.clicker == 2:
-            self.set_image_on_label(self.lbl_pos2, lechuga_path, .8)
+            mets.set_image_on_label(self.lbl_pos2, lechuga_path, .8)
         elif self.clicker == 3:
-            self.set_image_on_label(self.lbl_pos3, lechuga_path, .8)
+            mets.set_image_on_label(self.lbl_pos3, lechuga_path, .8)
         elif self.clicker == 4:
-            self.set_image_on_label(self.lbl_pos4, lechuga_path, .8)
+            mets.set_image_on_label(self.lbl_pos4, lechuga_path, .8)
         elif self.clicker == 5:
-            self.set_image_on_label(self.lbl_pos5, lechuga_path, .8)
+            mets.set_image_on_label(self.lbl_pos5, lechuga_path, .8)
 
     def on_btn_tomate_clicked(self):
         self.clicker += 1
         orden.append("Tomate")
         self.btn_tomate.setDisabled(True)
         if self.clicker == 1:
-            self.set_image_on_label(self.lbl_pos1, tomate_path, 1)
+            mets.set_image_on_label(self.lbl_pos1, tomate_path, 1)
         elif self.clicker == 2:
-            self.set_image_on_label(self.lbl_pos2, tomate_path, 1)
+            mets.set_image_on_label(self.lbl_pos2, tomate_path, 1)
         elif self.clicker == 3:
-            self.set_image_on_label(self.lbl_pos3, tomate_path, 1)
+            mets.set_image_on_label(self.lbl_pos3, tomate_path, 1)
         elif self.clicker == 4:
-            self.set_image_on_label(self.lbl_pos4, tomate_path, 1)
+            mets.set_image_on_label(self.lbl_pos4, tomate_path, 1)
         elif self.clicker == 5:
-            self.set_image_on_label(self.lbl_pos5, tomate_path, 1)
+            mets.set_image_on_label(self.lbl_pos5, tomate_path, 1)
 
     def on_btn_cebolla_clicked(self):
         self.clicker += 1
         orden.append("Cebolla")
         self.btn_cebolla.setDisabled(True)
         if self.clicker == 1:
-            self.set_image_on_label(self.lbl_pos1, cebolla_path, .8)
+            mets.set_image_on_label(self.lbl_pos1, cebolla_path, .8)
         elif self.clicker == 2:
-            self.set_image_on_label(self.lbl_pos2, cebolla_path, .8)
+            mets.set_image_on_label(self.lbl_pos2, cebolla_path, .8)
         elif self.clicker == 3:
-            self.set_image_on_label(self.lbl_pos3, cebolla_path, .8)
+            mets.set_image_on_label(self.lbl_pos3, cebolla_path, .8)
         elif self.clicker == 4:
-            self.set_image_on_label(self.lbl_pos4, cebolla_path, .8)
+            mets.set_image_on_label(self.lbl_pos4, cebolla_path, .8)
         elif self.clicker == 5:
-            self.set_image_on_label(self.lbl_pos5, cebolla_path, .8)
+            mets.set_image_on_label(self.lbl_pos5, cebolla_path, .8)
 
     def on_btn_queso_clicked(self):
         self.clicker += 1
         orden.append("Queso")
         self.btn_queso.setDisabled(True)
         if self.clicker == 1:
-            self.set_image_on_label(self.lbl_pos1, quesito_path, 1)
+            mets.set_image_on_label(self.lbl_pos1, quesito_path, 1)
         elif self.clicker == 2:
-            self.set_image_on_label(self.lbl_pos2, quesito_path, 1)
+            mets.set_image_on_label(self.lbl_pos2, quesito_path, 1)
         elif self.clicker == 3:
-            self.set_image_on_label(self.lbl_pos3, quesito_path, 1)
+            mets.set_image_on_label(self.lbl_pos3, quesito_path, 1)
         elif self.clicker == 4:
-            self.set_image_on_label(self.lbl_pos4, quesito_path, 1)
+            mets.set_image_on_label(self.lbl_pos4, quesito_path, 1)
         elif self.clicker == 5:
-            self.set_image_on_label(self.lbl_pos5, quesito_path, 1)
+            mets.set_image_on_label(self.lbl_pos5, quesito_path, 1)
 
     def on_btn_coca_clicked(self):
-        self.set_image_on_label(self.lbl_refresco, coca_path, 1)
+        mets.set_image_on_label(self.lbl_refresco, coca_path, 1)
         bebida_actual.clear()
         bebida_actual.append("Coca-Cola")
 
     def on_btn_fresca_clicked(self):
-        self.set_image_on_label(self.lbl_refresco, fresca_path, 1)
+        mets.set_image_on_label(self.lbl_refresco, fresca_path, 1)
         bebida_actual.clear()
         bebida_actual.append("Fresca")
 
     def on_btn_agua_clicked(self):
-        self.set_image_on_label(self.lbl_refresco, agua_path, 1.5)
+        mets.set_image_on_label(self.lbl_refresco, agua_path, 1.5)
         bebida_actual.clear()
         bebida_actual.append("Agua")
 
     def on_btn_fanta_clicked(self):
-        self.set_image_on_label(self.lbl_refresco, fanta_path, .8)
+        mets.set_image_on_label(self.lbl_refresco, fanta_path, .8)
         bebida_actual.clear()
         bebida_actual.append("Fanta")
 
@@ -382,15 +376,15 @@ class burger(QWidget):
         orden.append("Pan")
         self.btn_pan_arriba.setDisabled(True)
         if self.clicker == 1:
-            self.set_image_on_label(self.lbl_pos1, pan_arriba_path, 1)
+            mets.set_image_on_label(self.lbl_pos1, pan_arriba_path, 1)
         elif self.clicker == 2:
-            self.set_image_on_label(self.lbl_pos2, pan_arriba_path, 1)
+            mets.set_image_on_label(self.lbl_pos2, pan_arriba_path, 1)
         elif self.clicker == 3:
-            self.set_image_on_label(self.lbl_pos3, pan_arriba_path, 1)
+            mets.set_image_on_label(self.lbl_pos3, pan_arriba_path, 1)
         elif self.clicker == 4:
-            self.set_image_on_label(self.lbl_pos4, pan_arriba_path, 1)
+            mets.set_image_on_label(self.lbl_pos4, pan_arriba_path, 1)
         elif self.clicker == 5:
-            self.set_image_on_label(self.lbl_pos5, pan_arriba_path, 1)
+            mets.set_image_on_label(self.lbl_pos5, pan_arriba_path, 1)
 
     def on_btn_limpiar_clicked(self):
         self.lbl_pos1.clear()
@@ -408,17 +402,22 @@ class burger(QWidget):
         orden.clear()
         bebida_actual.clear()
 
-    def on_btn_terminar_clicked(self):
-        base = conn.obtener_ingredientes(25)
+    def on_btn_terminar_clicked(self, cliente_id):
+        base = conn.obtener_ingredientes(cliente_id)
+    
         if orden[-1] != "Pan":
             QMessageBox.warning(self, "¡Cuidado!", "Recuerda que el pan debe ir al final.")
             return False
-        
-        if bebida_actual[0] != conn.obtener_refresco(25): # type: ignore
-            QMessageBox.warning(self, "¡Cuidado!", "Oops, parece que te equivocaste de bebida. \n"
-                                + "No pasa nada, solo hay que intentarlo otra vez. ¡Ánimo!")
+    
+        if not bebida_actual:
+            QMessageBox.warning(self, "¡Cuidado!", "Por favor selecciona una bebida.")
             return False
-        
+    
+        if bebida_actual[0] != conn.obtener_refresco(cliente_id): # type: ignore
+            QMessageBox.warning(self, "¡Cuidado!", "Oops, parece que te equivocaste de bebida. \n"
+                            + "No pasa nada, solo hay que intentarlo otra vez. ¡Ánimo!")
+            return False
+    
         if set(base) == set(orden[:-1]): # type: ignore
             mensaje_good()
             self.close()
@@ -426,8 +425,8 @@ class burger(QWidget):
             return True
         else:
             ingredientes_diff = set(base) - set(orden[:-1]) # type: ignore
-            QMessageBox.warning(self, "¡Cuidado!", f"Parece que te faltaron los siguientes ingredientes: \n {ingredientes_diff}."
-                                + "No pasa nada, solo hay que intentarlo otra vez. ¡Ánimo!")
+            QMessageBox.warning(self, "¡Cuidado!", f"Parece que te equivocaste o te faltaron algunos ingredientes: \n {ingredientes_diff}."
+                            + "No te preocupes, solo tienes que intentarlo otra vez. ¡Ánimo!")
             return False
 
     # endregion

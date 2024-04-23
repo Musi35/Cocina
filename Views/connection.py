@@ -52,11 +52,12 @@ def get_cliente(cliente_id):
 
 def obtener_ruta(cliente_id):
     cliente_data = get_cliente(cliente_id)
-    if cliente_data:
+    if cliente_data is not None:
         ruta = f"src/AdminSoftware/res/img/costumers/{cliente_id}.png"
         return ruta
     else:
         return None
+
 
 def obtener_nombre(cliente_id):
     cliente_data = get_cliente(cliente_id)

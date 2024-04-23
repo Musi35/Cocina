@@ -9,7 +9,7 @@ class multi(QWidget):
 
         self.setWindowTitle("La Cocinita - Modo Multijugador")
         self.resize(1080, 720)
-        label = mets.load_image_label(self, "src/AdminSoftware/res/img/fondo.jpg")
+        label = mets.load_image_label(self, "src/AdminSoftware/res/img/fondo_multi.jpg")
         mets.iconify(self)
         self.setup_ui()
         
@@ -18,6 +18,12 @@ class multi(QWidget):
         lbl_nombre.setText(nombre + "'s")
         lbl_nombre.setAlignment(Qt.AlignmentFlag.AlignCenter)
         lbl_nombre.setGeometry(0, 0, 1080, 120)
+        
+        btn_salir = mets.ColoredButton("Menú Principal", self)
+        btn_salir.setObjectName("otros")
+        btn_salir.setFixedSize(160, 60)
+        btn_salir.move(880, 50)
+        btn_salir.clicked.connect(self.on_btn_salir_clicked)
 
     def setup_ui(self):
         # region buttons
@@ -44,17 +50,6 @@ class multi(QWidget):
         # endregion
 
         # region otros
-        btn_llamadas = mets.ColoredButton("Llamada Entrante", self)
-        btn_llamadas.setObjectName("llamada")
-        btn_llamadas.setFixedSize(160, 60)
-        btn_llamadas.move(40, 220)
-
-        btn_salir = mets.ColoredButton("Menú Principal", self)
-        btn_salir.setObjectName("otros")
-        btn_salir.setFixedSize(160, 60)
-        btn_salir.move(40, 400)
-        btn_salir.clicked.connect(self.on_btn_salir_clicked)
-
         btn_tareas = mets.ColoredButton("Tarea Pendiente", self)
         btn_tareas.setObjectName("otros")
         btn_tareas.setFixedSize(160, 60)
