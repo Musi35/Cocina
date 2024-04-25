@@ -3,17 +3,18 @@ import methods as mets
 import solo as solo
 import multi as multi
 import options as op
-from PySide6.QtWidgets import QApplication, QMainWindow, QLabel
+from PySide6.QtWidgets import QMainWindow, QLabel
 
 ruta_txt = "src/AdminSoftware/res/options/options.txt"
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("La Cocinita")
-        self.resize(1080, 720)
+        self.resize(1080, 700)
         self.setup_buttons()
         mets.iconify(self)
-
+        self.solo = solo.solo()
+        
         # Create the title label
         label = QLabel(self)
         label.setObjectName("titulo")
@@ -44,15 +45,12 @@ class MainWindow(QMainWindow):
     # region button functions
     def on_btn_solo_clicked(self):
         self.close()
-        nombre_extraido = obtener_nombre(ruta_txt)
-        nombre = nombre_extraido if nombre_extraido is not None else ""
-        self.solo = solo.solo(nombre=nombre)
-        self.solo.menu_principal_signal.connect(self.show_main_window)
+        self.solo = solo.solo()
         self.solo.show()
 
     def on_btn_multi_clicked(self):
         self.close()
-        nombre_extraido = obtener_nombre(ruta_txt)
+        nombre_extraido = mets.obtener_nombre(ruta_txt)
         nombre = nombre_extraido if nombre_extraido is not None else ""
         self.multi = multi.multi(nombre=nombre)
         self.multi.menu_principal_signal.connect(self.show_main_window)
@@ -60,7 +58,7 @@ class MainWindow(QMainWindow):
 
     def on_btn_opciones_clicked(self):
         self.close()
-        nombre = obtener_nombre(ruta_txt)
+        nombre = mets.obtener_nombre(ruta_txt)
         tareas = mets.obtener_tareas(ruta_txt)
         self.opciones = op.options(nombre or "", tareas or 0)
         self.opciones.menu_principal_signal.connect(self.show_main_window)
@@ -69,27 +67,4 @@ class MainWindow(QMainWindow):
     def show_main_window(self):
         self.show()
     # endregion
-
-def obtener_nombre(ruta_archivo):
-    try:
-        # Abrir el archivo en modo lectura
-        with open(ruta_archivo, 'r') as archivo:
-            # Leer todas las líneas del archivo
-            lineas = archivo.readlines()
-
-            # Buscar la línea que contiene "Nombre:"
-            for linea in lineas:
-                if "Nombre:" in linea:
-                    # Extraer el nombre después de "Nombre:"
-                    nombre = linea.split(":")[1].strip()
-                    return nombre
-
-    except FileNotFoundError:
-        print("El archivo no se encontró.")
-        return None
-
-app = QApplication(sys.argv)
-window = MainWindow()
-mets.apply_stylesheet(app)
-window.show()
-sys.exit(app.exec())
+    

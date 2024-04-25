@@ -154,3 +154,7 @@ QMessageBox, QInputDialog {
 QLabel#test{
     background-color: none;
 }
+
+QWidget#solo{
+    background-color: none;
+}

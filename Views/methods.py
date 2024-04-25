@@ -6,7 +6,7 @@ class ColoredButton(QPushButton):
     def __init__(self, text, parent=None):
         super().__init__(text, parent)
 
-def load_image_label(window, image_path):
+def load_image_fondo(window, image_path):
     label = QLabel(window)
     pixmap = QPixmap(image_path)
     label.setPixmap(pixmap)
@@ -42,3 +42,21 @@ def set_image_on_label(label, image_path, number):
         pixmap = pixmap.scaledToWidth(label.width() * number)
         label.setPixmap(pixmap)
         label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        
+def obtener_nombre(ruta_archivo):
+    try:
+        # Abrir el archivo en modo lectura
+        with open(ruta_archivo, 'r') as archivo:
+            # Leer todas las líneas del archivo
+            lineas = archivo.readlines()
+
+            # Buscar la línea que contiene "Nombre:"
+            for linea in lineas:
+                if "Nombre:" in linea:
+                    # Extraer el nombre después de "Nombre:"
+                    nombre = linea.split(":")[1].strip()
+                    return nombre
+
+    except FileNotFoundError:
+        print("El archivo no se encontró.")
+        return None

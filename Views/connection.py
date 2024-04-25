@@ -14,7 +14,6 @@ def connect():
             user=user,
             password=password
         )
-        print("Conexión exitosa")
         return connection
     except Exception as e:
         print(f"Error al conectar a PostgreSQL: {e}")
@@ -48,7 +47,6 @@ def get_cliente(cliente_id):
         if conex:
             cursor.close()
             conex.close()
-            print("Conexión cerrada.")
 
 def obtener_ruta(cliente_id):
     cliente_data = get_cliente(cliente_id)
@@ -57,7 +55,6 @@ def obtener_ruta(cliente_id):
         return ruta
     else:
         return None
-
 
 def obtener_nombre(cliente_id):
     cliente_data = get_cliente(cliente_id)

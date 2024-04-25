@@ -11,7 +11,7 @@ class multi(QWidget):
 
         self.setWindowTitle("La Cocinita - Modo Multijugador")
         self.resize(1080, 720)
-        label = mets.load_image_label(self, "src/AdminSoftware/res/img/fondo_multi.jpg")
+        label = mets.load_image_fondo(self, "src/AdminSoftware/res/img/fondo_multi.jpg")
         mets.iconify(self)
         self.setup_ui()
         
