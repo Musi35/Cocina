@@ -144,7 +144,7 @@ QLabel#ticket{
     text-align: center;
 }
 
-QMessageBox {
+QMessageBox, QInputDialog {
     background-color: #CDE5D7;
     color: #011638;
     font-family: "Verdana";

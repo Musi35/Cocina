@@ -32,7 +32,7 @@ class solo(QWidget):
         # endregion
 
         # region buttons
-        self.btn_tareas = mets.ColoredButton("Tarea Pendiente", self)
+        self.btn_tareas = mets.ColoredButton("Atender Cliente", self)
         self.btn_tareas.setObjectName("otros")
         self.btn_tareas.setFixedSize(160, 60)
         self.btn_tareas.move(880, 130)
@@ -64,7 +64,6 @@ class solo(QWidget):
         self.burgi.solo_signal.connect(self.show_burger_window)
         self.burgi.show()
         self.close()
-
 
     def show_burger_window(self):
         self.show()
