@@ -7,7 +7,7 @@ En la carpeta de video está un archivo .zip con un video que muestra el funcion
 Se utilizaron los siguientes elementos para la realización del juego:
 
 - PostgreSQL para la base de datos de los clientes.
-- PySide6 y Qt para el entorno visual.
+- PySide6 para el entorno visual.
 - Python para la programación.
 - Visual Studio Code para el entorno de programación.
 
